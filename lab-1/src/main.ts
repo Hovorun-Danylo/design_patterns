@@ -1,11 +1,11 @@
 
+import { Enclosure } from "./enclosure/Enclosure.js";
 import { Catalogue } from "./abstract/Catalogue.js";
-import { AnimalType } from "./animal/AnimalType.js";
+import { AnimalType } from "./animals/AnimalType.js";
+import { AnimalSize } from "./animals/AnimalSize.js";
 import { FoodType } from "./food/FoodType.js";
-import { AnimalSize } from "./animal/AnimalSize.js";
-import { Animal } from "./animal/Animal.js";
+import { Animal } from "./animals/Animal.js";
 import { Food } from "./food/Food.js";
-import {Enclosure} from "./enclosure/Enclosure.js";
 
 // region Config
 
@@ -65,15 +65,22 @@ const OmnivoreSpecies = Catalogue.create(AnimalType<any>, {
 
 // endregion
 
-const bobik = new Animal("bobik", HerbivoreSpecies.elephant)
-const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant)
+class Zoo {
+    app() {
+        const bobik = new Animal("bobik", HerbivoreSpecies.elephant)
+        const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant)
 
-const hay = new Food(HerbivoreDiet.hay, 50)
-const vegetables = new Food(HerbivoreDiet.vegetables, 100)
+        const hay = new Food(HerbivoreDiet.hay, 50)
+        const vegetables = new Food(HerbivoreDiet.vegetables, 100)
 
-const enclosure = new Enclosure(2, [ bobik, bobik2 ])
+        const enclosure = new Enclosure(2, [ bobik, bobik2 ])
 
-const assortment = [ hay, vegetables ]
-bobik.feedAssortment(assortment)
+        const assortment = [ hay, vegetables ]
+        bobik.feedAssortment(assortment)
 
-enclosure.showInhabitants()
+        enclosure.showInhabitants()
+    }
+}
+
+const zoo = new Zoo()
+zoo.app()

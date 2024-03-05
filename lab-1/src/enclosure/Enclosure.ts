@@ -1,5 +1,5 @@
 
-import { IAnimal } from "../animal/Animal.js";
+import { IAnimal } from "../animals/Animal.js";
 
 let nextEnclosureId = 0
 
