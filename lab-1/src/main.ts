@@ -33,7 +33,7 @@ const OmnivoreDiet = Catalogue.create(FoodType<any>, {
 
 // endregion
 
-// region Cages
+// region Species
 
 const AnimalSizes = Catalogue.create(AnimalSize<any>, {
     small: new AnimalSize("Small", 0),
@@ -41,10 +41,6 @@ const AnimalSizes = Catalogue.create(AnimalSize<any>, {
     large: new AnimalSize("Large", 2),
     extra: new AnimalSize("Extra", 3),
 })
-
-// endregion
-
-// region Species
 
 const HerbivoreSpecies = Catalogue.create(AnimalType<any>, {
     elephant: new AnimalType("Elephant", HerbivoreDiet, 100, AnimalSizes.large),
@@ -75,9 +71,9 @@ const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant)
 const hay = new Food(HerbivoreDiet.hay, 50)
 const vegetables = new Food(HerbivoreDiet.vegetables, 100)
 
-const cage = new Enclosure(2, [ bobik, bobik2 ])
+const enclosure = new Enclosure(2, [ bobik, bobik2 ])
 
 const assortment = [ hay, vegetables ]
 bobik.feedAssortment(assortment)
 
-cage.showItems()
+enclosure.showInhabitants()

@@ -4,7 +4,7 @@ import { FoodType } from "./food/FoodType.js";
 import { AnimalSize } from "./animal/AnimalSize.js";
 import { Animal } from "./animal/Animal.js";
 import { Food } from "./food/Food.js";
-import { Cage } from "./cage/Cage.js";
+import { Enclosure } from "./enclosure/Enclosure.js";
 // region Config
 // region Diets
 const HerbivoreDiet = Catalogue.create((FoodType), {
@@ -25,15 +25,13 @@ const OmnivoreDiet = Catalogue.create((FoodType), {
     ...CarnivoreDiet.items
 });
 // endregion
-// region Cages
+// region Species
 const AnimalSizes = Catalogue.create((AnimalSize), {
     small: new AnimalSize("Small", 0),
     medium: new AnimalSize("Medium", 1),
     large: new AnimalSize("Large", 2),
     extra: new AnimalSize("Extra", 3),
 });
-// endregion
-// region Species
 const HerbivoreSpecies = Catalogue.create((AnimalType), {
     elephant: new AnimalType("Elephant", HerbivoreDiet, 100, AnimalSizes.large),
     giraffe: new AnimalType("Giraffe", HerbivoreDiet, 80, AnimalSizes.extra),
@@ -56,8 +54,8 @@ const bobik = new Animal("bobik", HerbivoreSpecies.elephant);
 const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant);
 const hay = new Food(HerbivoreDiet.hay, 50);
 const vegetables = new Food(HerbivoreDiet.vegetables, 100);
-const cage = new Cage(2, [bobik, bobik2]);
+const enclosure = new Enclosure(2, [bobik, bobik2]);
 const assortment = [hay, vegetables];
 bobik.feedAssortment(assortment);
-cage.showItems();
+enclosure.showInhabitants();
 //# sourceMappingURL=main.js.map
