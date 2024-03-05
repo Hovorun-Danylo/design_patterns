@@ -13,7 +13,7 @@ export interface ISetContainer<T> {
     showItems(): void
 }
 
-export class Cage<T extends string> implements ISetContainer<IAnimal<T>> {
+export class Enclosure<T extends string> implements ISetContainer<IAnimal<T>> {
     readonly id
     private _animals: Set<IAnimal<T>> = new Set()
 

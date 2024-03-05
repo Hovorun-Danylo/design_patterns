@@ -5,7 +5,7 @@ import { FoodType } from "./food/FoodType.js";
 import { AnimalSize } from "./animal/AnimalSize.js";
 import { Animal } from "./animal/Animal.js";
 import { Food } from "./food/Food.js";
-import {Cage} from "./cage/Cage.js";
+import {Enclosure} from "./enclosure/Enclosure.js";
 
 // region Config
 
@@ -75,7 +75,7 @@ const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant)
 const hay = new Food(HerbivoreDiet.hay, 50)
 const vegetables = new Food(HerbivoreDiet.vegetables, 100)
 
-const cage = new Cage(2, [ bobik, bobik2 ])
+const cage = new Enclosure(2, [ bobik, bobik2 ])
 
 const assortment = [ hay, vegetables ]
 bobik.feedAssortment(assortment)
