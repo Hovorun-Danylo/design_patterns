@@ -7,9 +7,9 @@ export interface ISetContainer<T> {
     items: ReadonlySet<T>
     readonly capacity: number
 
-    add(animal: T): void
+    add(item: T): void
 
-    remove(animal: T): void
+    remove(item: T): void
     showItems(): void
 }
 
