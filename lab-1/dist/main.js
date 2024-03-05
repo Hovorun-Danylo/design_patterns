@@ -27,10 +27,10 @@ const OmnivoreDiet = Catalogue.create((FoodType), {
 // endregion
 // region Species
 const AnimalSizes = Catalogue.create((AnimalSize), {
-    small: new AnimalSize("Small", 0),
-    medium: new AnimalSize("Medium", 1),
-    large: new AnimalSize("Large", 2),
-    extra: new AnimalSize("Extra", 3),
+    small: new AnimalSize("Small"),
+    medium: new AnimalSize("Medium"),
+    large: new AnimalSize("Large"),
+    extra: new AnimalSize("Extra"),
 });
 const HerbivoreSpecies = Catalogue.create((AnimalType), {
     elephant: new AnimalType("Elephant", HerbivoreDiet, 100, AnimalSizes.large),
