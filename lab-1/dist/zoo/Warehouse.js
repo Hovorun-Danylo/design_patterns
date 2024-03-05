@@ -1,10 +1,10 @@
 export class Warehouse {
-    constructor(factory, catalogues) {
+    constructor(factory, foodTypes) {
         this.stock = new Set();
-        for (let catalogue of catalogues) {
-            for (let foodType of Object.values(catalogue)) {
+        for (let catalogue of foodTypes) {
+            for (let foodType of Object.values(catalogue.items)) {
                 let food = factory.create(foodType);
-                console.log(food);
+                this.stock.add(food);
             }
         }
     }

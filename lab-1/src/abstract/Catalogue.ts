@@ -3,6 +3,7 @@ import { IEquatable } from "./IEquatable.js";
 
 export interface ICatalogue<T extends IEquatable<T>> extends IEquatable<ICatalogue<T>> {
     contains(item: T): boolean
+    items: ItemsType<T>
 }
 
 type ItemsType<T extends IEquatable<T>> = Record<string, T>
@@ -32,8 +33,8 @@ export class Catalogue<T extends IEquatable<T>, K extends ItemsType<T>> implemen
     }
 
     equals(other: ICatalogue<T>): boolean {
-        const thisValues = Object.values(this) as T[];
-        const otherValues = Object.values(other) as T[];
+        const thisValues = Object.values(this.items) as T[];
+        const otherValues = Object.values(other.items) as T[];
 
         if (thisValues.length !== otherValues.length) {
             return false;
