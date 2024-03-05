@@ -6,6 +6,9 @@ import { AnimalSize } from "./animals/AnimalSize.js";
 import { FoodType } from "./food/FoodType.js";
 import { Animal } from "./animals/Animal.js";
 import { Food } from "./food/Food.js";
+import { Zoo } from "./zoo/Zoo.js";
+import { Warehouse } from "./zoo/Warehouse.js";
+import { RandomFoodFactory } from "./food/factory/RandomFoodFactory.js";
 
 // region Config
 
@@ -65,22 +68,23 @@ const OmnivoreSpecies = Catalogue.create(AnimalType<any>, {
 
 // endregion
 
-class Zoo {
-    app() {
-        const bobik = new Animal("bobik", HerbivoreSpecies.elephant)
-        const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant)
+const bobik = new Animal("bobik", HerbivoreSpecies.elephant)
+const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant)
 
-        const hay = new Food(HerbivoreDiet.hay, 50)
-        const vegetables = new Food(HerbivoreDiet.vegetables, 100)
+const hay = new Food(HerbivoreDiet.hay, 50)
+const vegetables = new Food(HerbivoreDiet.vegetables, 100)
 
-        const enclosure = new Enclosure(2, [ bobik, bobik2 ])
+const enclosure = new Enclosure(2, [ bobik, bobik2 ])
 
-        const assortment = [ hay, vegetables ]
-        bobik.feedAssortment(assortment)
+const assortment = [ hay, vegetables ]
+bobik.feedAssortment(assortment)
 
-        enclosure.showInhabitants()
-    }
-}
+enclosure.showInhabitants()
 
-const zoo = new Zoo()
+const randomFoodFactory = new RandomFoodFactory()
+const warehouse = new Warehouse(randomFoodFactory, [
+    HerbivoreDiet, CarnivoreDiet, OmnivoreDiet
+])
+
+const zoo = new Zoo(warehouse)
 zoo.app()

@@ -1,0 +1,1 @@
+{"version":3,"file":"RandomFoodFactory.js","sourceRoot":"","sources":["../../../src/food/factory/RandomFoodFactory.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,IAAI,EAAe,MAAM,YAAY,CAAC;AAE/C,MAAM,OAAO,iBAAiB;IAC1B,MAAM,CAAmB,QAAsB;QAC3C,OAAO,IAAI,IAAI,CAAC,QAAQ,EAAE,EAAE,CAAC,CAAC;IAClC,CAAC;CACJ"}
