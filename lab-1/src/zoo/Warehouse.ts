@@ -39,7 +39,7 @@ export class Warehouse<L extends string> implements IWarehouse<L>, IRestockable<
         this.stock.set(consumable.foodType, consumable)
     }
 
-    pullOut(consumableType: getFoodTypes<L>, weightInGrams: number): getFood<L> {
+    pullOut<T extends L>(consumableType: IFoodType<T>, weightInGrams: number): Food<T> {
         if (weightInGrams <= 0) {
             throw Error("Pulling weight can't be <= 0!")
         }
