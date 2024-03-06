@@ -29,15 +29,15 @@ const omnivoreFood = {
     ...carnivoreFood,
 }
 
-export const HerbivoreDiet = Catalogue.create<
+export const HerbivoreFood = Catalogue.create<
     InferInnerTypes<typeof herbivoreFood>, typeof herbivoreFood
 >(herbivoreFood)
 
-export const CarnivoreDiet = Catalogue.create<
+export const CarnivoreFood = Catalogue.create<
     InferInnerTypes<typeof carnivoreFood>, typeof carnivoreFood
 >(carnivoreFood)
 
-export const OmnivoreDiet = Catalogue.create<
+export const OmnivoreFood = Catalogue.create<
     InferInnerTypes<typeof omnivoreFood>, typeof omnivoreFood
 >(omnivoreFood)
 
@@ -57,22 +57,22 @@ export const AnimalSizes = Catalogue.create<
 >(animalSizes)
 
 const herbivoreSpecies = {
-    elephant: new AnimalType("Elephant", HerbivoreDiet, 100, AnimalSizes.large),
-    giraffe: new AnimalType("Giraffe", HerbivoreDiet, 80, AnimalSizes.extra),
-    zebra: new AnimalType("Zebra", HerbivoreDiet, 60, AnimalSizes.medium),
-    koala: new AnimalType("Koala", HerbivoreDiet, 40, AnimalSizes.small),
-    panda: new AnimalType("Panda", HerbivoreDiet, 70, AnimalSizes.medium),
-    monkey: new AnimalType("Monkey", HerbivoreDiet, 50, AnimalSizes.small),
+    elephant: new AnimalType("Elephant", HerbivoreFood, 100, AnimalSizes.large),
+    giraffe: new AnimalType("Giraffe", HerbivoreFood, 80, AnimalSizes.extra),
+    zebra: new AnimalType("Zebra", HerbivoreFood, 60, AnimalSizes.medium),
+    koala: new AnimalType("Koala", HerbivoreFood, 40, AnimalSizes.small),
+    panda: new AnimalType("Panda", HerbivoreFood, 70, AnimalSizes.medium),
+    monkey: new AnimalType("Monkey", HerbivoreFood, 50, AnimalSizes.small),
 }
 
 const carnivoreSpecies = {
-    lion: new AnimalType("Lion", CarnivoreDiet, 120, AnimalSizes.medium),
-    tiger: new AnimalType("Tiger", CarnivoreDiet, 110, AnimalSizes.medium),
-    crocodile: new AnimalType("Crocodile", CarnivoreDiet, 130, AnimalSizes.large),
+    lion: new AnimalType("Lion", CarnivoreFood, 120, AnimalSizes.medium),
+    tiger: new AnimalType("Tiger", CarnivoreFood, 110, AnimalSizes.medium),
+    crocodile: new AnimalType("Crocodile", CarnivoreFood, 130, AnimalSizes.large),
 }
 
 const omnivoreSpecies = {
-    penguin: new AnimalType("Penguin", OmnivoreDiet, 30, AnimalSizes.small),
+    penguin: new AnimalType("Penguin", OmnivoreFood, 30, AnimalSizes.small),
 }
 
 export const HerbivoreSpecies = Catalogue.create<

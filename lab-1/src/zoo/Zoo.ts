@@ -2,7 +2,7 @@
 import { IWarehouse } from "./Warehouse.js";
 
 export class Zoo {
-    constructor(private warehouse: IWarehouse) { }
+    constructor(private warehouse: IWarehouse<any>) { }
 
     app() {
         // const bobik = new Animal("bobik", HerbivoreSpecies.elephant)

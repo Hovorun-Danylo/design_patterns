@@ -2,27 +2,33 @@
 import { ICatalogue } from "../abstract/Catalogue.js";
 import { Food, IFood } from "../food/Food.js";
 import { IFoodFactory } from "../food/factory/IFactory.js";
-import { IFoodType } from "../food/FoodType.js";
+import { IFoodType} from "../food/FoodType.js";
 
-export interface IWarehouse {
-    addFood(consumable: IFood<any>): void
-    pullOut<T extends string>(consumableType: IFoodType<T>, weightInGrams: number): IFood<T>
-    getAvailableWeight(consumableType: IFoodType<any>): number
-    isAvailable(consumableType: IFoodType<any>): boolean
+type makeFood<T extends string> = { [K in T]: IFood<K> };
+type makeFoodType<T extends string> = { [K in T]: IFoodType<K> };
+
+type getFood<T extends string> = makeFood<T>[keyof makeFood<T>];
+type getFoodTypes<T extends string> = makeFoodType<T>[keyof makeFoodType<T>];
+
+export interface IWarehouse<L extends string> {
+    addFood(consumable: getFood<L>): void
+    pullOut(consumableType: getFoodTypes<L>, weightInGrams: number): getFood<L>
+    getAvailableWeight(consumableType: getFoodTypes<L>): number
+    isAvailable(consumableType: getFoodTypes<L>): boolean
 }
 
-export interface IRestockable {
-    restock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>): void
+export interface IRestockable<L extends string> {
+    restock(factory: IFoodFactory, foodTypes: ICatalogue<getFoodTypes<L>>): void
 }
 
-export class Warehouse implements IWarehouse, IRestockable {
-    private stock: Map<IFoodType<any>, IFood<any>> = new Map()
+export class Warehouse<L extends string> implements IWarehouse<L>, IRestockable<L> {
+    private stock: Map<getFoodTypes<L>, getFood<L>> = new Map()
 
-    constructor(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
+    constructor(factory: IFoodFactory, foodTypes: ICatalogue<getFoodTypes<L>>) {
         this.restock(factory, foodTypes)
     }
 
-    addFood(consumable: IFood<any>) {
+    addFood(consumable: getFood<L>) {
         if (this.stock.has(consumable.foodType)) {
             const existingConsumable = this.stock.get(consumable.foodType)!
             existingConsumable.weightInGrams += consumable.weightInGrams
@@ -33,12 +39,13 @@ export class Warehouse implements IWarehouse, IRestockable {
         this.stock.set(consumable.foodType, consumable)
     }
 
-    pullOut<T extends string>(consumableType: IFoodType<T>, weightInGrams: number): IFood<T> {
+    pullOut(consumableType: getFoodTypes<L>, weightInGrams: number): getFood<L> {
         if (weightInGrams <= 0) {
             throw Error("Pulling weight can't be <= 0!")
         }
 
         const availableWeight = this.getAvailableWeight(consumableType)
+
         if (availableWeight < weightInGrams) {
             throw Error(`Not enough ${consumableType} in stock!`)
         }
@@ -47,23 +54,21 @@ export class Warehouse implements IWarehouse, IRestockable {
         return new Food(consumableType, weightInGrams)
     }
 
-    getAvailableWeight(consumableType: IFoodType<any>): number {
+    getAvailableWeight(consumableType: getFoodTypes<L>): number {
         if (this.stock.has(consumableType))
             return this.stock.get(consumableType)!.weightInGrams
 
         return 0;
     }
 
-    isAvailable(consumableType: IFoodType<any>): boolean {
+    isAvailable(consumableType: getFoodTypes<L>): boolean {
         return Boolean(this.getAvailableWeight(consumableType))
     }
 
-    restock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
-        for (let catalogue of foodTypes) {
-            for (let foodType of Object.values(catalogue.items)) {
-                let food = factory.create(foodType)
-                this.addFood(food)
-            }
+    restock(factory: IFoodFactory, catalogue: ICatalogue<getFoodTypes<L>>) {
+        for (let foodType of Object.values(catalogue.items)) {
+            let food = factory.create(foodType)
+            this.addFood(food)
         }
     }
 }

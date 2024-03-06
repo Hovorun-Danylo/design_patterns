@@ -31,12 +31,10 @@ export class Warehouse {
     isAvailable(consumableType) {
         return Boolean(this.getAvailableWeight(consumableType));
     }
-    restock(factory, foodTypes) {
-        for (let catalogue of foodTypes) {
-            for (let foodType of Object.values(catalogue.items)) {
-                let food = factory.create(foodType);
-                this.addFood(food);
-            }
+    restock(factory, catalogue) {
+        for (let foodType of Object.values(catalogue.items)) {
+            let food = factory.create(foodType);
+            this.addFood(food);
         }
     }
 }
