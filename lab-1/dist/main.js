@@ -50,7 +50,7 @@ const OmnivoreSpecies = Catalogue.create((AnimalType), {
 });
 // endregion
 // endregion
-const randomFoodFactory = new RandomFoodFactory();
+const randomFoodFactory = new RandomFoodFactory(500, 2000);
 const warehouse = new Warehouse(randomFoodFactory, [
     HerbivoreDiet, CarnivoreDiet
 ]);
