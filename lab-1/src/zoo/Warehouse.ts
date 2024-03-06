@@ -5,23 +5,19 @@ import { IFoodFactory } from "../food/factory/IFactory.js";
 import {IFoodType} from "../food/FoodType.js";
 
 export class Warehouse {
-    private stock: Set<IConsumable<any>>
+    private stock: Map<IFoodType<any>, IConsumable<any>> = new Map()
 
     constructor(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
-        this.stock = new Set(this.evaluateStock(factory, foodTypes))
+        this.evaluateStock(factory, foodTypes)
     }
 
-    private evaluateStock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>): Iterable<IConsumable<any>> {
-        const tmpStock: Map<IFoodType<any>, IConsumable<any>> = new Map()
-
+    private evaluateStock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
         for (let catalogue of foodTypes) {
             for (let foodType of Object.values(catalogue.items)) {
                 let food = factory.create(foodType)
-                this.addFood(tmpStock, food)
+                this.addFood(this.stock, food)
             }
         }
-
-        return tmpStock.values()
     }
 
     private addFood(stock: Map<IFoodType<any>, IConsumable<any>>, consumable: IConsumable<any>) {
