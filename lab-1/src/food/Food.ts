@@ -4,18 +4,18 @@ import { IFoodType } from "./FoodType.js";
 
 export interface IConsumable<T extends string>  {
     readonly foodType: IFoodType<T>
-    readonly weightInGrams: number
+    weightInGrams: number
 
     readonly calories: number
 }
 
 export class Food<T extends string> implements IConsumable<T>, IEquatable<IConsumable<T>> {
-    constructor(readonly foodType: IFoodType<T>, readonly weightInGrams: number) { }
+    constructor(readonly foodType: IFoodType<T>, public weightInGrams: number) { }
 
     get calories(): number {
         return this.weightInGrams / 100 * this.foodType.calories
     }
-    
+
     toString(): string {
         return `${this.weightInGrams}g ${this.foodType}`
     }
