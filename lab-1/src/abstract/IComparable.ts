@@ -1,4 +1,4 @@
 
-export interface IEquatable<T> {
+export interface IComparable<T> {
     equals: (other: T) => boolean
 }

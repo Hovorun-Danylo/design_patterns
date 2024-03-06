@@ -1,10 +1,10 @@
 
 import { ICatalogue } from "../abstract/Catalogue.js";
-import { IEquatable } from "../abstract/IEquatable.js";
+import { IComparable } from "../abstract/IComparable.js";
 import { IFoodType } from "../food/FoodType.js";
 import { IAnimalSize } from "./AnimalSize.js";
 
-export interface IAnimalType<T extends string> extends IEquatable<IAnimalType<T>> {
+export interface IAnimalType<T extends string> extends IComparable<IAnimalType<T>> {
     readonly type: T
     readonly diet: ICatalogue<IFoodType<any>>
     readonly entertainmentCostInCalories: number

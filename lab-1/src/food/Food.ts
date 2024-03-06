@@ -1,5 +1,5 @@
 
-import { IEquatable } from "../abstract/IEquatable.js";
+import { IComparable } from "../abstract/IComparable.js";
 import { IFoodType } from "./FoodType.js";
 
 export interface IFood<T extends string>  {
@@ -9,7 +9,7 @@ export interface IFood<T extends string>  {
     readonly calories: number
 }
 
-export class Food<T extends string> implements IFood<T>, IEquatable<IFood<T>> {
+export class Food<T extends string> implements IFood<T>, IComparable<IFood<T>> {
     constructor(readonly foodType: IFoodType<T>, public weightInGrams: number) { }
 
     get calories(): number {

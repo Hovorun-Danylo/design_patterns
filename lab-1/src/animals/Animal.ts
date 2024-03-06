@@ -1,5 +1,5 @@
 
-import { IEquatable } from "../abstract/IEquatable.js";
+import { IComparable } from "../abstract/IComparable.js";
 import { IAnimalType } from "./AnimalType.js";
 import { IFood } from "../food/Food.js";
 import { IAnimalSize } from "./AnimalSize.js";
@@ -22,7 +22,7 @@ export interface IEntertainable {
     entertain(): void
 }
 
-export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEntertainable, IEquatable<IAnimal<T>> {
+export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEntertainable, IComparable<IAnimal<T>> {
     private _hunger: number = 0
 
     constructor(

@@ -1,7 +1,7 @@
 
-import { IEquatable } from "../abstract/IEquatable.js";
+import { IComparable } from "../abstract/IComparable.js";
 
-export interface IFoodType<T extends string> extends IEquatable<IFoodType<T>> {
+export interface IFoodType<T extends string> extends IComparable<IFoodType<T>> {
     readonly name: T
     readonly calories: number
 }
