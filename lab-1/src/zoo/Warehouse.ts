@@ -9,39 +9,29 @@ export class Warehouse {
 
     constructor(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
         this.stock = new Set(this.evaluateStock(factory, foodTypes))
-        console.log(this.stock)
     }
 
-    private evaluateStock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>): IConsumable<any>[] {
-        const tmpStock: IConsumable<any>[] = []
+    private evaluateStock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>): Iterable<IConsumable<any>> {
+        const tmpStock: Map<IFoodType<any>, IConsumable<any>> = new Map()
 
         for (let catalogue of foodTypes) {
             for (let foodType of Object.values(catalogue.items)) {
                 let food = factory.create(foodType)
-                let existingFood = this.findFood(tmpStock, food)
-
-                this.updateStock(tmpStock, food, existingFood)
+                this.addFood(tmpStock, food)
             }
         }
 
-        return tmpStock
+        return tmpStock.values()
     }
 
-    private findFood(stock: Iterable<IConsumable<any>>, consumable: IConsumable<any>): IConsumable<any> | null {
-        for (let existingFood of stock) {
-            if (existingFood.foodType.equals(consumable.foodType))
-                return existingFood;
-        }
+    private addFood(stock: Map<IFoodType<any>, IConsumable<any>>, consumable: IConsumable<any>) {
+        if (stock.has(consumable.foodType)) {
+            const existingConsumable = stock.get(consumable.foodType)!
+            existingConsumable.weightInGrams += consumable.weightInGrams
 
-        return null;
-    }
-
-    private updateStock(stock: IConsumable<any>[], consumable: IConsumable<any>, existingConsumable: IConsumable<any> | null) {
-        if (existingConsumable == null) {
-            stock.push(consumable);
             return
         }
 
-        existingConsumable.weightInGrams += consumable.weightInGrams
+        stock.set(consumable.foodType, consumable)
     }
 }
