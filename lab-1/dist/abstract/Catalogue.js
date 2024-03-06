@@ -24,8 +24,11 @@ export class Catalogue {
         }
         return thisValues.every((value, i) => value.equals(otherValues[i]));
     }
-    static create(items) {
+    static innerCreate(items) {
         return new Catalogue(items);
+    }
+    static create(items) {
+        return Catalogue.innerCreate(items);
     }
 }
 //# sourceMappingURL=Catalogue.js.map
