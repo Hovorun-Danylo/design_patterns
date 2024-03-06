@@ -1,8 +1,8 @@
 
-import { Warehouse } from "./Warehouse.js";
+import { IWarehouse } from "./Warehouse.js";
 
 export class Zoo {
-    constructor(private warehouse: Warehouse) { }
+    constructor(private warehouse: IWarehouse) { }
 
     app() {
         // const bobik = new Animal("bobik", HerbivoreSpecies.elephant)

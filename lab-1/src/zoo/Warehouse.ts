@@ -1,11 +1,11 @@
 
 import { ICatalogue } from "../abstract/Catalogue.js";
-import { IConsumable } from "../food/Food.js";
+import { IFood } from "../food/Food.js";
 import { IFoodFactory } from "../food/factory/IFactory.js";
-import {IFoodType} from "../food/FoodType.js";
+import { IFoodType } from "../food/FoodType.js";
 
 export class Warehouse {
-    private stock: Map<IFoodType<any>, IConsumable<any>> = new Map()
+    private stock: Map<IFoodType<any>, IFood<any>> = new Map()
 
     constructor(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
         this.evaluateStock(factory, foodTypes)
@@ -20,7 +20,7 @@ export class Warehouse {
         }
     }
 
-    private addFood(stock: Map<IFoodType<any>, IConsumable<any>>, consumable: IConsumable<any>) {
+    private addFood(stock: Map<IFoodType<any>, IFood<any>>, consumable: IFood<any>) {
         if (stock.has(consumable.foodType)) {
             const existingConsumable = stock.get(consumable.foodType)!
             existingConsumable.weightInGrams += consumable.weightInGrams

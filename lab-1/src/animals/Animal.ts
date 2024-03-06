@@ -1,7 +1,7 @@
 
 import { IEquatable } from "../abstract/IEquatable.js";
 import { IAnimalType } from "./AnimalType.js";
-import { IConsumable } from "../food/Food.js";
+import { IFood } from "../food/Food.js";
 import { IAnimalSize } from "./AnimalSize.js";
 
 export interface IAnimal<T extends string> {
@@ -13,8 +13,8 @@ export interface IAnimal<T extends string> {
 export interface IFeedable {
     hunger: number
 
-    feed(food: IConsumable<any>): void
-    feedAssortment(foods: Iterable<IConsumable<any>>): void
+    feed(food: IFood<any>): void
+    feedAssortment(foods: Iterable<IFood<any>>): void
     displayHunger(): void
 }
 
@@ -56,7 +56,7 @@ export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEnterta
         console.log(`${this} entertains the audience`)
     }
 
-    feed(food: IConsumable<any>) {
+    feed(food: IFood<any>) {
         if (!this.type.diet.contains(food.foodType)) 
             throw Error(`${this} can't eat ${food}!`)
 
@@ -64,7 +64,7 @@ export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEnterta
         this.hunger -= Math.min(this.hunger, food.calories)
     }
 
-    feedAssortment(foods: Iterable<IConsumable<any>>) {
+    feedAssortment(foods: Iterable<IFood<any>>) {
         for (let food of foods) {
             this.feed(food)
         }

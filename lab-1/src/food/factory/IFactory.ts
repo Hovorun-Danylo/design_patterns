@@ -1,7 +1,7 @@
 
 import { IFoodType } from "../FoodType.js";
-import { IConsumable } from "../Food.js";
+import { IFood } from "../Food.js";
 
 export interface IFoodFactory {
-    create<T extends string>(foodType: IFoodType<T>): IConsumable<T>
+    create<T extends string>(foodType: IFoodType<T>): IFood<T>
 }
