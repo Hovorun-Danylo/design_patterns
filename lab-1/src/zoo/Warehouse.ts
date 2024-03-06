@@ -11,11 +11,15 @@ export interface IWarehouse {
     isAvailable(consumableType: IFoodType<any>): boolean
 }
 
-export class Warehouse implements IWarehouse {
+export interface IRestockable {
+    restock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>): void
+}
+
+export class Warehouse implements IWarehouse, IRestockable {
     private stock: Map<IFoodType<any>, IFood<any>> = new Map()
 
     constructor(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
-        this.evaluateStock(factory, foodTypes)
+        this.restock(factory, foodTypes)
     }
 
     addFood(consumable: IFood<any>) {
@@ -54,7 +58,7 @@ export class Warehouse implements IWarehouse {
         return Boolean(this.getAvailableWeight(consumableType))
     }
 
-    private evaluateStock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
+    restock(factory: IFoodFactory, foodTypes: Iterable<ICatalogue<IFoodType<any>>>) {
         for (let catalogue of foodTypes) {
             for (let foodType of Object.values(catalogue.items)) {
                 let food = factory.create(foodType)

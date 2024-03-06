@@ -2,7 +2,7 @@ import { Food } from "../food/Food.js";
 export class Warehouse {
     constructor(factory, foodTypes) {
         this.stock = new Map();
-        this.evaluateStock(factory, foodTypes);
+        this.restock(factory, foodTypes);
     }
     addFood(consumable) {
         if (this.stock.has(consumable.foodType)) {
@@ -31,7 +31,7 @@ export class Warehouse {
     isAvailable(consumableType) {
         return Boolean(this.getAvailableWeight(consumableType));
     }
-    evaluateStock(factory, foodTypes) {
+    restock(factory, foodTypes) {
         for (let catalogue of foodTypes) {
             for (let foodType of Object.values(catalogue.items)) {
                 let food = factory.create(foodType);
