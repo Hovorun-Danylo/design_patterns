@@ -2,6 +2,7 @@
 import { IFoodFactory } from "./IFactory.js";
 import { IFoodType } from "../FoodType.js";
 import { Food, IFood } from "../Food.js";
+import { getRandomInt } from "../../abstract/utils.js";
 
 export class RandomFoodFactory implements IFoodFactory {
     constructor(readonly min: number, readonly max: number) {
@@ -11,10 +12,6 @@ export class RandomFoodFactory implements IFoodFactory {
     }
 
     create<T extends string>(foodType: IFoodType<T>): IFood<T> {
-        return new Food(foodType, this.getRandomInt(this.min, this.max))
-    }
-
-    private getRandomInt(min: number, max: number): number {
-        return Math.floor(Math.random() * (max - min + 1)) + min
+        return new Food(foodType, getRandomInt(this.min, this.max))
     }
 }
