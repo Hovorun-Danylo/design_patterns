@@ -9,8 +9,6 @@ export interface ICatalogue<T extends IEquatable<T>> extends IEquatable<ICatalog
 type ItemsType<T extends IEquatable<T>> = Record<string, T>
 type LiteralCatalogue<T extends IEquatable<T>, K extends ItemsType<T>> = Catalogue<T, K> & K;
 
-type Constructor<T> = new (...args: any) => T
-
 export class Catalogue<T extends IEquatable<T>, K extends ItemsType<T>> implements ICatalogue<T> {
     private constructor(private _items: K) {
         Object.defineProperty(this, "_items", {
@@ -43,8 +41,8 @@ export class Catalogue<T extends IEquatable<T>, K extends ItemsType<T>> implemen
         return thisValues.every((value, i) => value.equals(otherValues[i]));
     }
 
-    static create<T extends IEquatable<T>, K extends ItemsType<T>>
-    (itemType: Constructor<T>, items: K): LiteralCatalogue<T, K> {
+    static create<T extends IEquatable<any>, K extends ItemsType<T>>
+    (items: K): LiteralCatalogue<T, K> {
         return new Catalogue(items) as ICatalogue<T> as LiteralCatalogue<T, K>;
     }
 }

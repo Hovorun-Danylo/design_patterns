@@ -24,7 +24,7 @@ export class Catalogue {
         }
         return thisValues.every((value, i) => value.equals(otherValues[i]));
     }
-    static create(itemType, items) {
+    static create(items) {
         return new Catalogue(items);
     }
 }
