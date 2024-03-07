@@ -1,5 +1,5 @@
 import { Food } from "../Food.js";
-import { getRandomInt } from "../../abstract/utils.js";
+import { Random } from "../../abstract/Random.js";
 export class RandomFoodFactory {
     constructor(min, max) {
         this.min = min;
@@ -9,7 +9,7 @@ export class RandomFoodFactory {
         }
     }
     create(foodType) {
-        return new Food(foodType, getRandomInt(this.min, this.max));
+        return new Food(foodType, Random.getRandomInt(this.min, this.max));
     }
 }
 //# sourceMappingURL=RandomFoodFactory.js.map
