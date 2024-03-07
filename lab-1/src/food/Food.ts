@@ -10,7 +10,23 @@ export interface IFood<T extends string>  {
 }
 
 export class Food<T extends string> implements IFood<T>, IComparable<IFood<T>> {
-    constructor(readonly foodType: IFoodType<T>, public weightInGrams: number) { }
+    private _weightInGrams: number = 0
+
+    constructor(readonly foodType: IFoodType<T>, weightInGrams: number) {
+        this.weightInGrams = weightInGrams
+    }
+
+    get weightInGrams(): number {
+        return this._weightInGrams
+    }
+
+    set weightInGrams(other: number) {
+        if (other < 0) {
+            throw Error("Weight can't be negative!")
+        }
+
+        this._weightInGrams = other
+    }
 
     get calories(): number {
         return this.weightInGrams / 100 * this.foodType.calories
