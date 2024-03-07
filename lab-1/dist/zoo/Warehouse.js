@@ -1,6 +1,7 @@
 import { Food } from "../food/Food.js";
 export class Warehouse {
     constructor(factory, foodTypes) {
+        this.foodTypes = foodTypes;
         this.stock = new Map();
         this.restock(factory, foodTypes);
     }

@@ -1,28 +1,46 @@
 import { Zoo } from "./zoo/Zoo.js";
 import { Warehouse } from "./zoo/Warehouse.js";
 import { RandomFoodFactory } from "./food/factory/RandomFoodFactory.js";
-import { HerbivoreSpecies, OmnivoreFood } from "./config.js";
+import { HerbivoreSpecies, OmnivoreFood, OmnivoreSpecies } from "./config.js";
 import { Employee } from "./employee/Employee.js";
 import { Animal } from "./animals/Animal.js";
-import { Food } from "./food/Food.js";
 import { Enclosure } from "./enclosure/Enclosure.js";
-function testZoo(zoo) {
+import { Random } from "./abstract/Random.js";
+import { Console } from "./abstract/Console.js";
+function fillZoo(zoo) {
     const bob = new Employee("Bob", "Animal Curator");
     zoo.register("employee", bob);
-    const bobik = new Animal("bobik", HerbivoreSpecies.elephant);
-    zoo.register("animal", bobik);
-    const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant);
-    zoo.register("animal", bobik2);
-    const hay = new Food(OmnivoreFood.hay, 50);
-    const vegetables = new Food(OmnivoreFood.vegetables, 100);
-    const enclosure = new Enclosure(2, [bobik, bobik2]);
-    zoo.register("enclosure", enclosure);
-    const assortment = [hay, vegetables];
-    bob.feedAnimal(bobik, assortment);
-    enclosure.showInhabitants();
+    const ruby = new Animal("Ruby", HerbivoreSpecies.elephant);
+    const henry = new Animal("Henry", HerbivoreSpecies.elephant);
+    const charlie = new Animal("Charlie", OmnivoreSpecies.penguin);
+    [ruby, henry, charlie].forEach(animal => zoo.register("animal", animal));
+    const elephantsEnclosure = new Enclosure(2, [ruby, henry]);
+    const penguinsEnclosure = new Enclosure(10, [charlie]);
+    elephantsEnclosure.showInhabitants();
+    penguinsEnclosure.showInhabitants();
+    [elephantsEnclosure, penguinsEnclosure].forEach(enclosure => zoo.register("enclosure", enclosure));
+}
+function testZoo(zoo) {
+    fillZoo(zoo);
     zoo.showInfo("employee");
     zoo.showInfo("animal");
     zoo.showInfo("enclosure");
+    const animal = Random.getRandomElement(zoo.animals);
+    const employee = Random.getRandomElement(zoo.employees);
+    const randomFoodType = Random.getRandomCatalogueElement(animal.diet);
+    const availableWeight = zoo.warehouse.getAvailableWeight(randomFoodType);
+    const food = zoo.warehouse.pullOut(randomFoodType, Random.getRandomInt(100, availableWeight / 5));
+    animal.entertain();
+    employee.feedAnimal(animal, [food]);
+    animal.entertain();
+    animal.entertain();
+    console.log(Console.blockSeparator);
+    try {
+        const tooMuchFood = zoo.warehouse.pullOut(randomFoodType, availableWeight + 1);
+    }
+    catch (e) {
+        console.log(e.message);
+    }
 }
 const randomFoodFactory = new RandomFoodFactory(500, 2000);
 const warehouse = new Warehouse(randomFoodFactory, OmnivoreFood);

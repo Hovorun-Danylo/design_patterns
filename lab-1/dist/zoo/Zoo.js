@@ -1,14 +1,14 @@
 import { Console } from "../abstract/Console.js";
 export class Zoo {
+    get animals() { return this.registerMap["animal"]; }
+    get enclosures() { return this.registerMap["enclosure"]; }
+    get employees() { return this.registerMap["employee"]; }
     constructor(warehouse) {
         this.warehouse = warehouse;
-        this.animals = new Set();
-        this.enclosures = new Set();
-        this.employees = new Set();
         this.registerMap = {
-            "animal": this.animals,
-            "enclosure": this.enclosures,
-            "employee": this.employees,
+            "animal": new Set(),
+            "enclosure": new Set(),
+            "employee": new Set(),
         };
     }
     register(entityType, entity) {
@@ -19,7 +19,7 @@ export class Zoo {
             console.log(`No ${key}s registered!`);
             return;
         }
-        Console.printBlock(`${key}s:`, this.registerMap[key]);
+        Console.printBlock(`Zoo ${key}s:`, this.registerMap[key]);
     }
     restock(factory, foodTypes) {
         this.warehouse.restock(factory, foodTypes);

@@ -14,7 +14,7 @@ export class Food {
         this._weightInGrams = other;
     }
     get calories() {
-        return this.weightInGrams / 100 * this.foodType.calories;
+        return Math.round(this.weightInGrams / 100 * this.foodType.calories);
     }
     toString() {
         return `${this.weightInGrams}g ${this.foodType}`;

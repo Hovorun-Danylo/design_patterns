@@ -10,6 +10,7 @@ export interface IWarehouse<L extends string> {
     pullOut<T extends L>(consumableType: IFoodType<T>, weightInGrams: number): Food<T>
     getAvailableWeight(consumableType: getFoodTypes<L>): number
     isAvailable(consumableType: getFoodTypes<L>): boolean
+    readonly foodTypes: ICatalogue<getFoodTypes<L>>
 }
 
 export interface IRestockable<L extends string> {
@@ -19,7 +20,7 @@ export interface IRestockable<L extends string> {
 export class Warehouse<L extends string> implements IWarehouse<L>, IRestockable<L> {
     private stock: Map<getFoodTypes<L>, getFood<L>> = new Map()
 
-    constructor(factory: IFoodFactory, foodTypes: ICatalogue<getFoodTypes<L>>) {
+    constructor(factory: IFoodFactory, readonly foodTypes: ICatalogue<getFoodTypes<L>>) {
         this.restock(factory, foodTypes)
     }
 

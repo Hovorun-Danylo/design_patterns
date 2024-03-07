@@ -29,7 +29,7 @@ export class Food<T extends string> implements IFood<T>, IComparable<IFood<T>> {
     }
 
     get calories(): number {
-        return this.weightInGrams / 100 * this.foodType.calories
+        return Math.round(this.weightInGrams / 100 * this.foodType.calories)
     }
 
     toString(): string {
