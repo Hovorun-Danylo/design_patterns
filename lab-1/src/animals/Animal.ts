@@ -3,11 +3,14 @@ import { IComparable } from "../abstract/IComparable.js";
 import { IAnimalType } from "./AnimalType.js";
 import { IFood } from "../food/Food.js";
 import { IAnimalSize } from "./AnimalSize.js";
+import {ICatalogue} from "../abstract/Catalogue.js";
+import {IFoodType} from "../food/FoodType.js";
 
 export interface IAnimal<T extends string> {
     readonly name: string
     readonly type: IAnimalType<T>
     readonly size: IAnimalSize<any>
+    readonly diet: ICatalogue<IFoodType<any>>
 }
 
 export interface IFeedable {
@@ -37,6 +40,10 @@ export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEnterta
         return this.type.size
     }
 
+    get diet(): ICatalogue<IFoodType<any>> {
+        return this.type.diet
+    }
+
     get hunger(): number {
         return this._hunger
     }
@@ -57,7 +64,7 @@ export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEnterta
     }
 
     feed(food: IFood<any>) {
-        if (!this.type.diet.contains(food.foodType)) 
+        if (!this.diet.contains(food.foodType)) 
             throw Error(`${this} can't eat ${food}!`)
 
         console.log(`${this} is eating ${food} (${food.calories} calories)`)

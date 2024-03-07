@@ -8,6 +8,9 @@ export class Animal {
     get size() {
         return this.type.size;
     }
+    get diet() {
+        return this.type.diet;
+    }
     get hunger() {
         return this._hunger;
     }
@@ -23,7 +26,7 @@ export class Animal {
         console.log(`${this} entertains the audience`);
     }
     feed(food) {
-        if (!this.type.diet.contains(food.foodType))
+        if (!this.diet.contains(food.foodType))
             throw Error(`${this} can't eat ${food}!`);
         console.log(`${this} is eating ${food} (${food.calories} calories)`);
         this.hunger -= Math.min(this.hunger, food.calories);
