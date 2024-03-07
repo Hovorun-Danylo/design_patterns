@@ -25,8 +25,6 @@ export class Enclosure<T extends string> implements Set<IAnimal<T>>  {
             return
         }
 
-        console.log(this[Symbol.toStringTag])
-
         console.log(`${this} inhabitants:`)
         this.forEach(animal => console.log(`${animal}`))
         console.log("-".repeat(50))
