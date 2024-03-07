@@ -3,12 +3,7 @@ import { ICatalogue } from "../abstract/Catalogue.js";
 import { Food, IFood } from "../food/Food.js";
 import { IFoodFactory } from "../food/factory/IFactory.js";
 import { IFoodType} from "../food/FoodType.js";
-
-type makeFood<T extends string> = { [K in T]: IFood<K> };
-type makeFoodType<T extends string> = { [K in T]: IFoodType<K> };
-
-type getFood<T extends string> = makeFood<T>[keyof makeFood<T>];
-type getFoodTypes<T extends string> = makeFoodType<T>[keyof makeFoodType<T>];
+import {getFood, getFoodTypes} from "../abstract/types.js";
 
 export interface IWarehouse<L extends string> {
     addFood(consumable: getFood<L>): void

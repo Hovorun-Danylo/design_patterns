@@ -1,8 +1,6 @@
 
 import { IComparable } from "./IComparable.js";
-
-type InferInnerTypes<T extends Record<string, any>> =
-    T extends Record<string, infer U> ? U : never;
+import { InferInnerTypes } from "./types.js";
 
 export interface ICatalogue<T extends IComparable<T>> extends IComparable<ICatalogue<T>> {
     contains(item: T): boolean
