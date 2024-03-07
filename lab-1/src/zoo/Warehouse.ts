@@ -12,7 +12,7 @@ type getFoodTypes<T extends string> = makeFoodType<T>[keyof makeFoodType<T>];
 
 export interface IWarehouse<L extends string> {
     addFood(consumable: getFood<L>): void
-    pullOut(consumableType: getFoodTypes<L>, weightInGrams: number): getFood<L>
+    pullOut<T extends L>(consumableType: IFoodType<T>, weightInGrams: number): Food<T>
     getAvailableWeight(consumableType: getFoodTypes<L>): number
     isAvailable(consumableType: getFoodTypes<L>): boolean
 }

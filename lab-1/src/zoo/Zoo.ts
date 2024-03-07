@@ -1,8 +1,10 @@
 
-import { IWarehouse } from "./Warehouse.js";
+import {IRestockable, IWarehouse} from "./Warehouse.js";
 
-export class Zoo {
-    constructor(private warehouse: IWarehouse<any>) { }
+export class Zoo<T extends string> {
+    constructor(private warehouse: IWarehouse<T> & IRestockable<T>) {
+        
+    }
 
     app() {
         // const bobik = new Animal("bobik", HerbivoreSpecies.elephant)
