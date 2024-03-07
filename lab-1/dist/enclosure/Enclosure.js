@@ -1,4 +1,5 @@
 var _a;
+import { Console } from "../abstract/Console.js";
 let nextEnclosureId = 0;
 export class Enclosure {
     constructor(capacity, animals = []) {
@@ -15,9 +16,7 @@ export class Enclosure {
             console.log(`${this} is empty!`);
             return;
         }
-        console.log(`${this} inhabitants:`);
-        this.forEach(animal => console.log(`${animal}`));
-        console.log("-".repeat(50));
+        Console.printBlock(`${this} inhabitants:`, this._animals);
     }
     get size() {
         return this._animals.size;

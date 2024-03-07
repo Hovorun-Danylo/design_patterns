@@ -6,5 +6,8 @@ export class Employee {
     feedAnimal(animal, food) {
         animal.feedAssortment(food);
     }
+    toString() {
+        return `Employee: ${this.name}: ${this.position}`;
+    }
 }
 //# sourceMappingURL=Employee.js.map

@@ -1,5 +1,6 @@
 
 import { IAnimal } from "../animals/Animal.js";
+import {Console} from "../abstract/Console.js";
 
 let nextEnclosureId = 0
 
@@ -25,9 +26,7 @@ export class Enclosure<T extends string> implements Set<IAnimal<T>>  {
             return
         }
 
-        console.log(`${this} inhabitants:`)
-        this.forEach(animal => console.log(`${animal}`))
-        console.log("-".repeat(50))
+        Console.printBlock(`${this} inhabitants:`, this._animals)
     }
 
     get size() {

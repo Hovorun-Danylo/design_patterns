@@ -48,6 +48,6 @@ export class Catalogue<T extends IComparable<T>, K extends ItemsType<T>> impleme
     }
 
     static create<T extends Record<string, any>>(items: T) {
-        return Catalogue.innerCreate<InferInnerTypes<typeof items>, typeof items>(items)
+        return this.innerCreate<InferInnerTypes<typeof items>, typeof items>(items)
     }
 }

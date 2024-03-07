@@ -15,4 +15,8 @@ export class Employee<T extends string> implements IEmployee<T> {
     feedAnimal(animal: IFeedable, food: Iterable<IFood<any>>) {
         animal.feedAssortment(food)
     }
+
+    toString(): string {
+        return `Employee: ${this.name}: ${this.position}`
+    } 
 }

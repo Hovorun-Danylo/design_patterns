@@ -1,8 +1,4 @@
-import { Animal } from "../animals/Animal.js";
-import { HerbivoreSpecies, OmnivoreFood } from "../config.js";
-import { Food } from "../food/Food.js";
-import { Enclosure } from "../enclosure/Enclosure.js";
-import { Employee } from "../employee/Employee.js";
+import { Console } from "../abstract/Console.js";
 export class Zoo {
     constructor(warehouse) {
         this.warehouse = warehouse;
@@ -18,17 +14,12 @@ export class Zoo {
     register(entityType, entity) {
         this.registerMap[entityType].add(entity);
     }
-    app() {
-        const bob = new Employee("Bob", "Animal Curator");
-        this.register("employee", bob);
-        const bobik = new Animal("bobik", HerbivoreSpecies.elephant);
-        const bobik2 = new Animal("bobik2", HerbivoreSpecies.elephant);
-        const hay = new Food(OmnivoreFood.hay, 50);
-        const vegetables = new Food(OmnivoreFood.vegetables, 100);
-        const enclosure = new Enclosure(2, [bobik, bobik2]);
-        const assortment = [hay, vegetables];
-        bob.feedAnimal(bobik, assortment);
-        enclosure.showInhabitants();
+    showInfo(key) {
+        if (this.registerMap[key].size == 0) {
+            console.log(`No ${key}s registered!`);
+            return;
+        }
+        Console.printBlock(`${key}s:`, this.registerMap[key]);
     }
     restock(factory, foodTypes) {
         this.warehouse.restock(factory, foodTypes);

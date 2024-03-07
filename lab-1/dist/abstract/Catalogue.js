@@ -28,7 +28,7 @@ export class Catalogue {
         return new Catalogue(items);
     }
     static create(items) {
-        return Catalogue.innerCreate(items);
+        return this.innerCreate(items);
     }
 }
 //# sourceMappingURL=Catalogue.js.map
