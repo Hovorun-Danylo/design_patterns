@@ -20,16 +20,16 @@ export class Zoo<T extends string> {
     private enclosures: Set<Set<IAnimal<any>>> = new Set()
     private employees: Set<IEmployee<any>> = new Set()
 
-    private registerMap = new Map<keyof EntityTypeMap, Set<EntityTypeMap[keyof EntityTypeMap]>>([
-        ["animal", this.animals],
-        ["enclosure", this.enclosures],
-        ["employee", this.employees],
-    ])
+    private registerMap: { [key in keyof EntityTypeMap]: Set<EntityTypeMap[key]> } = {
+        "animal": this.animals,
+        "enclosure": this.enclosures,
+        "employee": this.employees,
+    }
 
     constructor(private warehouse: IWarehouse<T> & IRestockable<T>) { }
 
-    register<T extends keyof EntityTypeMap>(entityType: T, entity: EntityTypeMap[T]) {
-        this.registerMap.get(entityType)?.add(entity)
+    register<K extends keyof EntityTypeMap>(entityType: K, entity: EntityTypeMap[K]) {
+        this.registerMap[entityType].add(entity)
     }
 
     app() {

@@ -9,14 +9,14 @@ export class Zoo {
         this.animals = new Set();
         this.enclosures = new Set();
         this.employees = new Set();
-        this.registerMap = new Map([
-            ["animal", this.animals],
-            ["enclosure", this.enclosures],
-            ["employee", this.employees],
-        ]);
+        this.registerMap = {
+            "animal": this.animals,
+            "enclosure": this.enclosures,
+            "employee": this.employees,
+        };
     }
     register(entityType, entity) {
-        this.registerMap.get(entityType)?.add(entity);
+        this.registerMap[entityType].add(entity);
     }
     app() {
         const bob = new Employee("Bob", "Animal Curator");
