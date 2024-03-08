@@ -12,6 +12,8 @@ import { Animal } from "./animals/Animal.js";
 import { Enclosure } from "./enclosure/Enclosure.js";
 import { Random } from "./abstract/Random.js";
 import {Console} from "./abstract/Console.js";
+import {FoodType} from "./food/FoodType.js";
+import {Food} from "./food/Food.js";
 
 function fillZoo<T extends string>(zoo: Zoo<T>) {
     const bob = new Employee("Bob", "Animal Curator")
@@ -54,6 +56,17 @@ function testZoo<T extends string>(zoo: Zoo<T>) {
 
     try {
         const tooMuchFood = zoo.warehouse.pullOut(randomFoodType, availableWeight + 1)
+    } catch (e: any) {
+        console.log(e.message)
+    }
+
+    console.log(Console.blockSeparator)
+
+    try {
+        const wrongFoodType = new FoodType("WrongFood", 1000)
+        const wrongFood = new Food(wrongFoodType, 100)
+
+        employee.feedAnimal(animal, [ wrongFood ])
     } catch (e: any) {
         console.log(e.message)
     }

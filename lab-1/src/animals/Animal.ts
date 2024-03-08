@@ -56,8 +56,10 @@ export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEnterta
     }
 
     entertain() {
-        if (this.type.entertainmentCostInCalories / 2 < this.hunger)
-            throw Error(`${this} is too hungry!`)
+        if (this.type.entertainmentCostInCalories / 2 < this.hunger) {
+            console.log(`${this} is too hungry!`)
+            return
+        }
 
         this.hunger += this.type.entertainmentCostInCalories
         console.log(`${this} entertains the audience`)

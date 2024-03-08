@@ -33,7 +33,7 @@ export class Food<T extends string> implements IFood<T>, IComparable<IFood<T>> {
     }
 
     toString(): string {
-        return `${this.weightInGrams}g ${this.foodType}`
+        return `${this.weightInGrams}g of ${this.foodType}`
     }
 
     equals(other: IFood<T>): boolean {
