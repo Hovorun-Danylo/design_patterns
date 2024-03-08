@@ -1,21 +1,13 @@
 
-import { IAnimal } from "../animal/Animal.js";
+import { IAnimal } from "../animals/Animal.js";
+import {Console} from "../abstract/Console.js";
 
-let nextCageId = 0
+let nextEnclosureId = 0
 
-export interface ISetContainer<T> {
-    items: ReadonlySet<T>
-    readonly capacity: number
-
-    add(item: T): void
-
-    remove(item: T): void
-    showItems(): void
-}
-
-export class Enclosure<T extends string> implements ISetContainer<IAnimal<T>> {
+export class Enclosure<T extends string> implements Set<IAnimal<T>>  {
     readonly id
     private _animals: Set<IAnimal<T>> = new Set()
+    readonly [Symbol.toStringTag]: string = this._animals[Symbol.toStringTag];
 
     public constructor(
         readonly capacity: number,
@@ -25,45 +17,64 @@ export class Enclosure<T extends string> implements ISetContainer<IAnimal<T>> {
             this.add(animal)
         }
 
-        this.id = nextCageId++
+        this.id = nextEnclosureId++
     }
 
-    get items(): ReadonlySet<IAnimal<T>> {
-        return this._animals
-    }
-
-    add(animal: IAnimal<T>) {
-        if (this.items.size === this.capacity) {
-            throw Error(`Cage ${this.id} is full!`)
-        }
-
-        if (this.items.has(animal)) {
-            throw Error(`${animal} is already in this cage!`)
-        }
-
-        this._animals.add(animal)
-    }
-
-    remove(animal: IAnimal<T>) {
-        if (!this._animals.has(animal)) {
-            throw Error(`${animal} is not present in cage ${this.id}!`)
-        }
-
-        this._animals.delete(animal)
-    }
-
-    showItems() {
-        if (this.items.size == 0) {
+    showInhabitants() {
+        if (this.size == 0) {
             console.log(`${this} is empty!`)
             return
         }
 
-        console.log(`${this} inhabitants:`)
-        this.items.forEach(animal => console.log(`${animal}`))
-        console.log("-".repeat(50))
+        Console.printBlock(`${this} inhabitants:`, this._animals)
+    }
+
+    get size() {
+        return this._animals.size
+    }
+
+    [Symbol.iterator](): IterableIterator<IAnimal<T>> {
+        return this._animals[Symbol.iterator]();
+    }
+
+    add(value: IAnimal<T>): this {
+        if (this._animals.size === this.capacity) {
+            throw Error(`${this} is full!`)
+        }
+
+        this._animals.add(value)
+        return this;
+    }
+
+    clear(): void {
+        this._animals.clear()
+    }
+
+    delete(value: IAnimal<T>): boolean {
+        return this._animals.delete(value)
+    }
+
+    entries(): IterableIterator<[IAnimal<T>, IAnimal<T>]> {
+        return this._animals.entries();
+    }
+
+    forEach(callbackfn: (value: IAnimal<T>, value2: IAnimal<T>, set: Set<IAnimal<T>>) => void, thisArg?: any): void {
+        this._animals.forEach(callbackfn, thisArg)
+    }
+
+    has(value: IAnimal<T>): boolean {
+        return this._animals.has(value);
+    }
+
+    keys(): IterableIterator<IAnimal<T>> {
+        return this._animals.keys();
+    }
+
+    values(): IterableIterator<IAnimal<T>> {
+        return this._animals.values();
     }
 
     toString(): string {
-        return `Cage ${this.id}`
+        return `Enclosure ${this.id}`
     }
 }
