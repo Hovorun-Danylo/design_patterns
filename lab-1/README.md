@@ -1,4 +1,6 @@
 
+### That is basically my first ts project so any tips are appreciated!
+
 # Programming principles used in code
 
 ## SRP (single responsibility principle)
@@ -93,3 +95,6 @@ composition on its own), besides [Zoo](README.md/#dip-dependency-inversion-princ
 construction code good example of composition
 would be [Animal](src/config.ts)(and similar classes) once again, because they
 are *composed* of corresponding type([AnimalType](src/animals/AnimalType.ts), [FoodType](src/food/FoodType.ts) etc.)
+
+## Class dependencies
+![](class_diagram.png)
