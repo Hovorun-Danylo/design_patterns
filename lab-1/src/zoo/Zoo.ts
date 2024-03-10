@@ -1,11 +1,14 @@
 
-import { IRestockable, IWarehouse } from "./Warehouse.js";
-import { IAnimal, IEntertainable, IFeedable } from "../animals/Animal.js";
-import { IEmployee } from "../employee/Employee.js";
 import { IFoodFactory } from "../food/factory/IFactory.js";
-import { ICatalogue } from "../abstract/Catalogue.js";
 import { getFoodTypes } from "../abstract/types.js";
 import { Console } from "../abstract/Console.js";
+import {IWarehouse} from "../interfaces/IWarehouse.js";
+import {IRestockable} from "../interfaces/IRestockable.js";
+import {IEmployee} from "../interfaces/IEmployee.js";
+import {IAnimal} from "../interfaces/IAnimal.js";
+import {IEntertainable} from "../interfaces/IEntertainable.js";
+import {IFeedable} from "../interfaces/IFeedable.js";
+import {ICatalogue} from "../interfaces/ICatalogue.js";
 
 type EntityTypeMap = {
     animal: IAnimal<any> & IEntertainable & IFeedable;

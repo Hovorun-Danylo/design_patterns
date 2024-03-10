@@ -1,13 +1,7 @@
 
 import { IComparable } from "../abstract/IComparable.js";
-import { IFoodType } from "./FoodType.js";
-
-export interface IFood<T extends string>  {
-    readonly foodType: IFoodType<T>
-    weightInGrams: number
-
-    readonly calories: number
-}
+import {IFood} from "../interfaces/IFood.js";
+import {IFoodType} from "../interfaces/IFoodType.js";
 
 export class Food<T extends string> implements IFood<T>, IComparable<IFood<T>> {
     private _weightInGrams: number = 0

@@ -1,21 +1,11 @@
 
-import { ICatalogue } from "../abstract/Catalogue.js";
-import { Food, IFood } from "../food/Food.js";
+import { Food } from "../food/Food.js";
 import { IFoodFactory } from "../food/factory/IFactory.js";
-import { IFoodType} from "../food/FoodType.js";
 import {getFood, getFoodTypes} from "../abstract/types.js";
-
-export interface IWarehouse<L extends string> {
-    addFood(consumable: getFood<L>): void
-    pullOut<T extends L>(consumableType: IFoodType<T>, weightInGrams: number): Food<T>
-    getAvailableWeight(consumableType: getFoodTypes<L>): number
-    isAvailable(consumableType: getFoodTypes<L>): boolean
-    readonly foodTypes: ICatalogue<getFoodTypes<L>>
-}
-
-export interface IRestockable<L extends string> {
-    restock(factory: IFoodFactory, foodTypes: ICatalogue<getFoodTypes<L>>): void
-}
+import {IWarehouse} from "../interfaces/IWarehouse.js";
+import {IRestockable} from "../interfaces/IRestockable.js";
+import {ICatalogue} from "../interfaces/ICatalogue.js";
+import {IFoodType} from "../interfaces/IFoodType.js";
 
 export class Warehouse<L extends string> implements IWarehouse<L>, IRestockable<L> {
     private stock: Map<getFoodTypes<L>, getFood<L>> = new Map()

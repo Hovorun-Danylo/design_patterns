@@ -1,6 +1,6 @@
 
-import { IFood } from "../food/Food.js";
-import { IFoodType } from "../food/FoodType.js";
+import {IFood} from "../interfaces/IFood.js";
+import {IFoodType} from "../interfaces/IFoodType.js";
 
 export type InferInnerTypes<T extends Record<string, any>> =
     T extends Record<string, infer U> ? U : never;

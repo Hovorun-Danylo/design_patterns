@@ -1,6 +1,6 @@
 
-import { IAnimal } from "../animals/Animal.js";
 import {Console} from "../abstract/Console.js";
+import {IAnimal} from "../interfaces/IAnimal.js";
 
 let nextEnclosureId = 0
 

@@ -1,5 +1,5 @@
-import { Food } from "../Food.js";
 import { Random } from "../../abstract/Random.js";
+import { Food } from "../Food.js";
 export class RandomFoodFactory {
     constructor(min, max) {
         this.min = min;

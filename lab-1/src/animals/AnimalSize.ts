@@ -1,9 +1,5 @@
 
-import { IComparable } from "../abstract/IComparable.js";
-
-export interface IAnimalSize<T extends string> extends IComparable<IAnimalSize<T>> {
-    readonly name: T
-}
+import {IAnimalSize} from "../interfaces/IAnimalSize.js";
 
 export class AnimalSize<T extends string> implements IAnimalSize<T> {
     constructor(readonly name: T) { }

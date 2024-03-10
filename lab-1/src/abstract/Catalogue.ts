@@ -1,14 +1,11 @@
 
 import { IComparable } from "./IComparable.js";
 import { InferInnerTypes } from "./types.js";
-
-export interface ICatalogue<T extends IComparable<T>> extends IComparable<ICatalogue<T>> {
-    contains(item: T): boolean
-    items: ItemsType<T>
-}
-
-type ItemsType<T extends IComparable<T>> = Record<string, T>
-type LiteralCatalogue<T extends IComparable<T>, K extends ItemsType<T>> = Catalogue<T, K> & K;
+import {
+    ICatalogue,
+    ItemsType,
+    LiteralCatalogue
+} from "../interfaces/ICatalogue.js";
 
 export class Catalogue<T extends IComparable<T>, K extends ItemsType<T>> implements ICatalogue<T> {
     private constructor(private _items: K) {

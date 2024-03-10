@@ -1,10 +1,8 @@
 
-import { ICatalogue } from "./Catalogue.js";
 import { IComparable } from "./IComparable.js";
+import {ICatalogue} from "../interfaces/ICatalogue.js";
 
 export abstract class Random {
-    private constructor() { }
-
     static getRandomInt(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min
     }

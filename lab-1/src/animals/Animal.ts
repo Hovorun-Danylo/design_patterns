@@ -1,29 +1,12 @@
 
 import { IComparable } from "../abstract/IComparable.js";
-import { IAnimalType } from "./AnimalType.js";
-import { IFood } from "../food/Food.js";
-import { IAnimalSize } from "./AnimalSize.js";
-import {ICatalogue} from "../abstract/Catalogue.js";
-import {IFoodType} from "../food/FoodType.js";
-
-export interface IAnimal<T extends string> {
-    readonly name: string
-    readonly type: IAnimalType<T>
-    readonly size: IAnimalSize<any>
-    readonly diet: ICatalogue<IFoodType<any>>
-}
-
-export interface IFeedable {
-    hunger: number
-
-    feed(food: IFood<any>): void
-    feedAssortment(foods: Iterable<IFood<any>>): void
-    displayHunger(): void
-}
-
-export interface IEntertainable {
-    entertain(): void
-}
+import {IAnimal} from "../interfaces/IAnimal.js";
+import {IFeedable} from "../interfaces/IFeedable.js";
+import {IEntertainable} from "../interfaces/IEntertainable.js";
+import {IAnimalType} from "../interfaces/IAnimalType.js";
+import {IFoodType} from "../interfaces/IFoodType.js";
+import {IFood} from "../interfaces/IFood.js";
+import {ICatalogue} from "../interfaces/ICatalogue.js";
 
 export class Animal<T extends string> implements IAnimal<T>, IFeedable, IEntertainable, IComparable<IAnimal<T>> {
     private _hunger: number = 0
